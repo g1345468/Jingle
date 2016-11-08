@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ArtistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var playingView: UIView!
     @IBOutlet weak var songLabel: UILabel!
@@ -21,14 +21,10 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        /*
-        let gerture = UITapGestureRecognizer(target:self, action: #selector(SecondViewController.showPlaying(_:)))
-        nowPlaying.addGestureRecognizer(<#T##gestureRecognizer: UIGestureRecognizer##UIGestureRecognizer#>)
-         */
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(SecondViewController.viewTap(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(ArtistViewController.viewTap(_:)))
         playingView.addGestureRecognizer(tap)
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(SecondViewController.viewSwipe(_:)))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(ArtistViewController.viewSwipe(_:)))
         playingView.addGestureRecognizer(swipe)
         
         self.view.bringSubviewToFront(playingView)
@@ -49,7 +45,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     func viewTap(sender: UITapGestureRecognizer) {
         
-        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier("test")
+        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier("playing")
         self.presentViewController(nextView!, animated: true, completion: nil)
  
     }
@@ -64,7 +60,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MyCell", forIndexPath: indexPath)
+        let cell = tableView.dequeueReusableCellWithIdentifier("ArtistCell", forIndexPath: indexPath)
         cell.textLabel!.text = artistNames[indexPath.row]
         return cell
     }
@@ -72,6 +68,8 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
+    
+    
     
     
     /*

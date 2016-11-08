@@ -14,8 +14,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     var player = MPMusicPlayerController()
     var mediaItem: MPMediaItem!
-    
-    
+  
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var artistLabel: UILabel!
@@ -23,6 +22,9 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
     @IBOutlet weak var playButton: UIButton!
     
     @IBOutlet var rateLabels: [UILabel]!
+    
+    
+  
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +39,22 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         // 通知の有効化
         player.beginGeneratingPlaybackNotifications()
         
+        
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(FirstViewController.viewSwipe(_:)))
+        swipe.numberOfTouchesRequired = 1  // 指の数
+        swipe.direction = UISwipeGestureRecognizerDirection.Down
+        self.view.addGestureRecognizer(swipe)
+        
         setPlayButton()
         
 
     }
+    
+    func viewSwipe(sender: UISwipeGestureRecognizer) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -158,8 +172,8 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         }
     }
     
-    
-    
+
+       
     
     
     deinit {
