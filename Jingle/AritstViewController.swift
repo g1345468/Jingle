@@ -24,8 +24,7 @@ class ArtistViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(ArtistViewController.viewTap(_:)))
         playingView.addGestureRecognizer(tap)
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(ArtistViewController.viewSwipe(_:)))
-        playingView.addGestureRecognizer(swipe)
+    
         
         self.view.bringSubviewToFront(playingView)
 
@@ -50,10 +49,6 @@ class ArtistViewController: UIViewController, UITableViewDelegate, UITableViewDa
  
     }
     
-    func viewSwipe(sender: UISwipeGestureRecognizer) {
-        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier("artist")
-        self.presentViewController(nextView!, animated: true, completion: nil)
-    }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return artistNames.count

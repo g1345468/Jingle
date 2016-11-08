@@ -36,6 +36,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         let notificationCenter = NSNotificationCenter.defaultCenter()
         notificationCenter.addObserver(self, selector: #selector(FirstViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: player)
         notificationCenter.addObserver(self, selector: #selector(FirstViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerPlaybackStateDidChangeNotification, object: player)
+        notificationCenter.addObserver(self, selector: #selector(FirstViewController.willEnterForegroundNotification(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
         // 通知の有効化
         player.beginGeneratingPlaybackNotifications()
         
@@ -45,8 +46,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         swipe.direction = UISwipeGestureRecognizerDirection.Down
         self.view.addGestureRecognizer(swipe)
         
-        setPlayButton()
-        
+     
 
     }
     
@@ -54,11 +54,13 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-
-    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(FirstViewController.willEnterForegroundNotification(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        mediaItem = player.nowPlayingItem
+        setPlayButton()
+        if mediaItem != nil {
+            updateSongInformationUI()
+        }
     }
 
 
@@ -68,7 +70,15 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
     }
     
     func willEnterForegroundNotification(notification: NSNotification) {
+        setProperty()
+    }
+    
+    func setProperty() {
+        mediaItem = player.nowPlayingItem
         setPlayButton()
+        if mediaItem != nil {
+            updateSongInformationUI()
+        }
     }
 
     func setPlayButton() {
@@ -124,8 +134,20 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         // 曲情報表示
         // (a ?? b は、a != nil ? a! : b を示す演算子です)
         // (aがnilの場合にはbとなります)
-        artistLabel.text = mediaItem.artist ?? "不明なアーティスト"
-        songLabel.text = mediaItem.title ?? "不明な曲"
+        if(mediaItem != nil) {
+            artistLabel.text = mediaItem.artist ?? "不明なアーティスト"
+            songLabel.text = mediaItem.title ?? "不明な曲"
+            setRateButton(mediaItem.rating)
+            if let artwork = mediaItem.artwork {
+                let image = artwork.imageWithSize(imageView.bounds.size)
+                imageView.image = image
+            } else {
+                // アートワークがないとき
+                // (今回は灰色表示としました)
+                imageView.image = nil
+                imageView.backgroundColor = UIColor.grayColor()
+            }
+        }
         
         /*
         if mediaItem.artist?.characters.count <= 6 {
@@ -136,30 +158,15 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
  */
         
         
-        setRateButton(mediaItem.rating)
+  
         
         // アートワーク表示
-        if let artwork = mediaItem.artwork {
-            let image = artwork.imageWithSize(imageView.bounds.size)
-            imageView.image = image
-        } else {
-            // アートワークがないとき
-            // (今回は灰色表示としました)
-            imageView.image = nil
-            imageView.backgroundColor = UIColor.grayColor()
-        }
+       
         
     }
     
     func nowPlayingItemChanged(notification: NSNotification) {
-        
-        mediaItem = player.nowPlayingItem
-        if mediaItem != nil {
-            updateSongInformationUI()
-        }
-        
-        setPlayButton()
-        
+        setProperty()
     }
     
     func setRateButton(rate: Int) {
@@ -175,7 +182,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
 
        
     
-    
+    /*
     deinit {
         // 再生中アイテム変更に対する監視をはずす
         let notificationCenter = NSNotificationCenter.defaultCenter()
@@ -183,6 +190,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         // ミュージックプレーヤー通知の無効化
         player.endGeneratingPlaybackNotifications()
     }
+ */
 
 
     @IBAction func pushPlayPause(sender: AnyObject) {
