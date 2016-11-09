@@ -140,9 +140,9 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1489" y="-146"/>
+            <point key="canvasLocation" x="2486.25" y="-146.83098591549296"/>
         </scene>
-        <!--Artist-->
+        <!--アーティスト-->
         <scene sceneID="wg7-f3-ORb">
             <objects>
                 <viewController storyboardIdentifier="artist" id="8rJ-Kc-sve" customClass="ArtistViewController" customModule="Jingle" customModuleProvider="target" sceneMemberID="viewController">
@@ -177,7 +177,7 @@
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xzi-O1-SY6" userLabel="border">
-                                <rect key="frame" x="0.0" y="474" width="320" height="0.5"/>
+                                <rect key="frame" x="0.0" y="474.5" width="320" height="0.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -203,7 +203,7 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Artist" image="second" id="cPa-gy-q4n"/>
+                    <navigationItem key="navigationItem" title="アーティスト" id="uWC-bk-kGB"/>
                     <connections>
                         <outlet property="artistLabel" destination="bMf-GE-0ko" id="81w-40-pIE"/>
                         <outlet property="artistTable" destination="PoK-g4-vJK" id="7zH-6g-KSu"/>
@@ -213,7 +213,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="303.75" y="231.33802816901408"/>
+            <point key="canvasLocation" x="1301.25" y="231.33802816901408"/>
         </scene>
         <!--Album-->
         <scene sceneID="wZC-5T-YmL">
@@ -228,7 +228,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="26W-9n-7ed" userLabel="border">
-                                <rect key="frame" x="0.0" y="474" width="320" height="0.5"/>
+                                <rect key="frame" x="0.0" y="474.5" width="320" height="0.5"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.5" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </view>
@@ -299,13 +299,32 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
+                        <segue destination="6pM-bC-x1N" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                         <segue destination="9T9-TR-8UT" kind="relationship" relationship="viewControllers" id="Lfe-4P-bZN"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-435" y="220"/>
+        </scene>
+        <!--Artist-->
+        <scene sceneID="qKj-g1-sm8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6pM-bC-x1N" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Artist" image="second" id="cPa-gy-q4n"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="bOg-qQ-050">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8rJ-Kc-sve" kind="relationship" relationship="rootViewController" id="tyC-U7-67d"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ebu-RG-oYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="303.75" y="231.33802816901408"/>
         </scene>
     </scenes>
     <resources>

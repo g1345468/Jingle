@@ -84,15 +84,6 @@ class ArtistViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
     }
-    
-    
-    
-    
-    /*
-    func showPlaying(gestureRecognizer: UITapGestureRecognizer) {
-        self.presentedViewController(FirstViewController, animated: true, completion: nil)
-    }
- */
 
     
 }
