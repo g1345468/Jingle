@@ -140,7 +140,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1494.375" y="-379.22535211267603"/>
+            <point key="canvasLocation" x="1489" y="-146"/>
         </scene>
         <!--Artist-->
         <scene sceneID="wg7-f3-ORb">
@@ -159,14 +159,14 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Song" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tg5-ur-F8d">
-                                        <rect key="frame" x="66" y="3" width="189" height="21"/>
+                                        <rect key="frame" x="60" y="2" width="200" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bMf-GE-0ko">
-                                        <rect key="frame" x="139" y="23" width="42" height="17"/>
+                                        <rect key="frame" x="60" y="22" width="200" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -205,8 +205,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Artist" image="second" id="cPa-gy-q4n"/>
                     <connections>
+                        <outlet property="artistLabel" destination="bMf-GE-0ko" id="81w-40-pIE"/>
                         <outlet property="artistTable" destination="PoK-g4-vJK" id="7zH-6g-KSu"/>
-                        <outlet property="playingView" destination="Oxx-fU-Zga" id="7Br-Rp-Lzv"/>
+                        <outlet property="playingView" destination="Oxx-fU-Zga" id="omO-HV-YdP"/>
                         <outlet property="songLabel" destination="Tg5-ur-F8d" id="2gJ-D9-l3V"/>
                     </connections>
                 </viewController>
@@ -255,21 +256,21 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Song" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UNe-Uy-Kee">
-                                        <rect key="frame" x="66" y="3" width="189" height="21"/>
+                                        <rect key="frame" x="60" y="2" width="200" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artist" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iRo-Va-LBC">
-                                        <rect key="frame" x="139" y="23" width="42" height="17"/>
+                                        <rect key="frame" x="60" y="22" width="200" height="17"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="0.9606943791" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" white="0.97276953962825286" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
@@ -278,6 +279,7 @@
                     <tabBarItem key="tabBarItem" title="Album" id="oqU-4x-9UP"/>
                     <connections>
                         <outlet property="albumTable" destination="WCa-xg-wWt" id="DP4-9n-zzW"/>
+                        <outlet property="artistLabel" destination="iRo-Va-LBC" id="8fj-Q0-tfl"/>
                         <outlet property="playingView" destination="tcB-CC-qmj" id="Dv0-0V-H4p"/>
                         <outlet property="songLabel" destination="UNe-Uy-Kee" id="Wdw-2L-fch"/>
                     </connections>

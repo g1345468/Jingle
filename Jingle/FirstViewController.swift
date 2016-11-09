@@ -30,7 +30,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        player = MPMusicPlayerController.systemMusicPlayer()
+        player = PlayingMedia.player
         
         // 再生中のItemが変わった時に通知を受け取る
         let notificationCenter = NSNotificationCenter.defaultCenter()
