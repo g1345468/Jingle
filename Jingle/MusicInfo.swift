@@ -9,9 +9,14 @@
 import Foundation
 import MediaPlayer
 
-class PlayingMedia {
+class MusicInfo {
     static let player = MPMusicPlayerController.systemMusicPlayer()
-    static let playingMedia = PlayingMedia()
-    var artist: String?
-    var song: String?
+    static var artist: String?
+    static var song: String?
+    
+    static var selectedArtist: String?
+    static var selectedAlbum: String?
+    
+    
+   
 }

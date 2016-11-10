@@ -9,7 +9,7 @@
 import UIKit
 import MediaPlayer
 
-class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
+class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     
     var player = MPMusicPlayerController()
@@ -23,6 +23,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     @IBOutlet var rateLabels: [UILabel]!
     
+    @IBOutlet weak var countLabel: UILabel!
     
   
 
@@ -30,24 +31,23 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        player = PlayingMedia.player
+        player = MusicInfo.player
         
         // 再生中のItemが変わった時に通知を受け取る
         let notificationCenter = NSNotificationCenter.defaultCenter()
-        notificationCenter.addObserver(self, selector: #selector(FirstViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: player)
-        notificationCenter.addObserver(self, selector: #selector(FirstViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerPlaybackStateDidChangeNotification, object: player)
-        notificationCenter.addObserver(self, selector: #selector(FirstViewController.willEnterForegroundNotification(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(MainViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: player)
+        notificationCenter.addObserver(self, selector: #selector(MainViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerPlaybackStateDidChangeNotification, object: player)
+        notificationCenter.addObserver(self, selector: #selector(MainViewController.willEnterForegroundNotification(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
         // 通知の有効化
         player.beginGeneratingPlaybackNotifications()
         
         
-        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(FirstViewController.viewSwipe(_:)))
+        let swipe = UISwipeGestureRecognizer(target: self, action: #selector(MainViewController.viewSwipe(_:)))
         swipe.numberOfTouchesRequired = 1  // 指の数
         swipe.direction = UISwipeGestureRecognizerDirection.Down
         self.view.addGestureRecognizer(swipe)
-        
-     
 
+       
     }
     
     func viewSwipe(sender: UISwipeGestureRecognizer) {
@@ -89,45 +89,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         }
         
     }
-    
-    
-    @IBAction func pick(sender: AnyObject) {
-        // MPMediaPickerControllerのインスタンスを作成
-        let picker = MPMediaPickerController()
-        // ピッカーのデリゲートを設定
-        picker.delegate = self
-        // 複数選択にする。（falseにすると、単数選択になる）
-        picker.allowsPickingMultipleItems = true
-        // ピッカーを表示する
-        presentViewController(picker, animated: true, completion: nil)
-
-    }
-    
-    func mediaPicker(mediaPicker: MPMediaPickerController, didPickMediaItems mediaItemCollection: MPMediaItemCollection) {
-        
-        // プレイヤーを止める
-        player.stop()
-        
-        // 選択した曲情報がmediaItemCollectionに入っているので、これをplayerにセット。
-        player.setQueueWithItemCollection(mediaItemCollection)
-        
-        // 選択した曲から最初の曲の情報を表示
-        mediaItem = mediaItemCollection.items.first
-        if mediaItem != nil {
-            updateSongInformationUI()
-        }
-        
-        // ピッカーを閉じ、破棄する
-        dismissViewControllerAnimated(true, completion: nil)
-        
-        player.play()
-        
-    }
-    
-    func mediaPickerDidCancel(mediaPicker: MPMediaPickerController) {
-        // ピッカーを閉じ、破棄する
-        dismissViewControllerAnimated(true, completion: nil)
-    }
+   
     
     func updateSongInformationUI() {
         
@@ -138,6 +100,7 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
             artistLabel.text = mediaItem.artist ?? "不明なアーティスト"
             songLabel.text = mediaItem.title ?? "不明な曲"
             setRateButton(mediaItem.rating)
+            countLabel.text = String(mediaItem.playCount)
             if let artwork = mediaItem.artwork {
                 let image = artwork.imageWithSize(imageView.bounds.size)
                 imageView.image = image
@@ -155,12 +118,8 @@ class FirstViewController: UIViewController, MPMediaPickerControllerDelegate {
         } else {
             artistLabel2.loadHTMLString("<marquee scrolldelay=40 truespeed scrollamount=1>" + mediaItem.artist! + "</marquee>", baseURL: nil)
         }
- */
+        */
         
-        
-  
-        
-        // アートワーク表示
        
         
     }
