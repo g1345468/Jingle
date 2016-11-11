@@ -38,8 +38,7 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
         notificationCenter.addObserver(self, selector: #selector(MainViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: player)
         notificationCenter.addObserver(self, selector: #selector(MainViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerPlaybackStateDidChangeNotification, object: player)
         notificationCenter.addObserver(self, selector: #selector(MainViewController.willEnterForegroundNotification(_:)), name: UIApplicationWillEnterForegroundNotification, object: nil)
-        // 通知の有効化
-        player.beginGeneratingPlaybackNotifications()
+
         
         
         let swipe = UISwipeGestureRecognizer(target: self, action: #selector(MainViewController.viewSwipe(_:)))

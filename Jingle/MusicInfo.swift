@@ -11,12 +11,7 @@ import MediaPlayer
 
 class MusicInfo {
     static let player = MPMusicPlayerController.systemMusicPlayer()
-    static var artist: String?
-    static var song: String?
     
     static var selectedArtist: String?
     static var selectedAlbum: String?
-    
-    
-   
 }

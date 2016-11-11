@@ -13,10 +13,7 @@ class ArtistAlbumSongViewController: UIViewController, UITableViewDelegate, UITa
     
     
     @IBOutlet weak var songTable: UITableView!
-    @IBOutlet weak var playingView: UIView!
-    @IBOutlet weak var songLabel: UILabel!
-    @IBOutlet weak var artistLabel: UILabel!
-    
+
     var songNames = [String]()
 
     override func viewDidLoad() {

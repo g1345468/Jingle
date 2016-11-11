@@ -11,10 +11,8 @@ import MediaPlayer
 
 class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    @IBOutlet weak var playingView: UIView!
+
     @IBOutlet weak var albumTable: UITableView!
-    @IBOutlet weak var songLabel: UILabel!
-    @IBOutlet weak var artistLabel: UILabel!
     
     var albumNames = [String]()
     
@@ -22,11 +20,6 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AlbumViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: MusicInfo.player)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ArtistViewController.viewTap(_:)))
-        playingView.addGestureRecognizer(tap)
-
         
         let query = MPMediaQuery.albumsQuery()
         for collection in query.collections! {
@@ -34,7 +27,6 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
             albumNames.append(albumName)
         }
         
-        setPlayingView()
         
     }
     
@@ -44,32 +36,7 @@ class AlbumViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // Dispose of any resources that can be recreated.
     }
     
-    
-    
-    func setPlayingView() {
-        let playingItem: MPMediaItem! = MusicInfo.player.nowPlayingItem
-        if(playingItem != nil) {
-            songLabel.text = playingItem.title ?? "不明な曲"
-            artistLabel.text = playingItem.artist ?? "不明なアーティスト"
-        }
-    }
-    
-    func nowPlayingItemChanged(notification: NSNotification) {
-        setPlayingView()
-    }
 
-    
-    func viewTap(sender: UITapGestureRecognizer) {
-        playingView.backgroundColor = UIColor.grayColor()
-        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier("playing")
-        self.presentViewController(nextView!, animated: true, completion: nil)
-        
-    }
-
-    override func viewWillAppear(animated: Bool) {
-        playingView.backgroundColor = Common.thinGray
-    }
-    
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

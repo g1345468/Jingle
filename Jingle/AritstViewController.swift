@@ -10,23 +10,13 @@ import UIKit
 import MediaPlayer
 
 class ArtistViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
 
     @IBOutlet weak var artistTable: UITableView!
-    @IBOutlet weak var playingView: UIView!
-    @IBOutlet weak var songLabel: UILabel!
-    @IBOutlet weak var artistLabel: UILabel!
     
     var artistNames = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(ArtistViewController.nowPlayingItemChanged(_:)), name: MPMusicPlayerControllerNowPlayingItemDidChangeNotification, object: MusicInfo.player)
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(ArtistViewController.viewTap(_:)))
-        playingView.addGestureRecognizer(tap)
-    
         
         let query = MPMediaQuery.artistsQuery()
         for collection in query.collections! {
@@ -35,35 +25,11 @@ class ArtistViewController: UIViewController, UITableViewDelegate, UITableViewDa
         }
     }
     
-    func updatePlayingView() {
-        let playingItem = MusicInfo.player.nowPlayingItem
-        if(playingItem != nil) {
-            songLabel.text = playingItem!.title ?? "不明な曲"
-            artistLabel.text = playingItem!.artist ?? "不明なアーティスト"
-        }
-    }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
-        playingView.backgroundColor = Common.thinGray
-        updatePlayingView()
-    }
-    
-    func nowPlayingItemChanged(notification: NSNotification) {
-        updatePlayingView()
-    }
-    
-    func viewTap(sender: UITapGestureRecognizer) {
-        
-        playingView.backgroundColor = UIColor.grayColor()
-        let nextView = self.storyboard?.instantiateViewControllerWithIdentifier("playing")
-        self.presentViewController(nextView!, animated: true, completion: nil)
- 
-    }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
