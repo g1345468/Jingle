@@ -25,7 +25,15 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     @IBOutlet weak var countLabel: UILabel!
     
-  
+    
+    @IBOutlet weak var blurView: UIVisualEffectView!
+    
+    
+    @IBOutlet weak var timeBar: UIProgressView!
+    
+    @IBOutlet weak var songTimeLabel: UILabel!
+    @IBOutlet weak var playingTimeLabel: UILabel!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -45,12 +53,61 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
         swipe.numberOfTouchesRequired = 1  // 指の数
         swipe.direction = UISwipeGestureRecognizerDirection.Down
         self.view.addGestureRecognizer(swipe)
+        
+        NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(MainViewController.updateTimeBar(_:)), userInfo: nil, repeats: true)
 
-       
+    }
+    
+    func updateTimeBar(timer: NSTimer) {
+        if(mediaItem != nil) {
+            timeBar.progress = Float(player.currentPlaybackTime) / Float(mediaItem.playbackDuration)
+            let hour: Int = Int(Float(player.currentPlaybackTime) / 3600)
+            let rest: Int = Int(Float(player.currentPlaybackTime) % 3600)
+            let minute = rest / 60
+            let second  = rest % 60
+            if(hour == 0) {
+                if(second < 10) {
+                    playingTimeLabel.text = String(minute) + ":0" + String(second)
+                } else {
+                    playingTimeLabel.text = String(minute) + ":" + String(second)
+                }
+            } else {
+                playingTimeLabel.text = String(hour) + ":" + String(minute) + ":" + String(second)
+            }
+
+        }
     }
     
     func viewSwipe(sender: UISwipeGestureRecognizer) {
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    
+    @IBAction func imageTap(sender: AnyObject) {
+        blurView.hidden = false
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.blurView.alpha = 1.0
+        })
+    }
+    
+    @IBAction func blurTap(sender: AnyObject) {
+        UIView.animateWithDuration(0.2, animations: {
+                self.blurView.alpha = 0.0
+            }, completion: { finished in
+                   self.blurView.hidden = true
+        })
+    }
+    
+    
+    
+    
+    
+    func viewTap(sender: UITapGestureRecognizer) {
+        if(blurView.hidden) {
+            blurView.hidden = false;
+        } else {
+            blurView.hidden = true;
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -109,6 +166,20 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
                 imageView.image = nil
                 imageView.backgroundColor = UIColor.grayColor()
             }
+            
+            let hour: Int = Int(Float(mediaItem.playbackDuration) / 3600)
+            let rest: Int = Int(Float(mediaItem.playbackDuration) % 3600)
+            let minute = rest / 60
+            let second  = rest % 60
+            if(hour == 0) {
+                if(second < 10) {
+                    songTimeLabel.text = String(minute) + ":0" + String(second)
+                } else {
+                    songTimeLabel.text = String(minute) + ":" + String(second)
+                }
+            } else {
+                songTimeLabel.text = String(hour) + ":" + String(minute) + ":" + String(second)
+            }
         }
         
         /*
@@ -152,6 +223,7 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
 
 
     @IBAction func pushPlayPause(sender: AnyObject) {
+      
         if player.playbackState == MPMusicPlaybackState.Playing {
             player.pause()
             playButton.setTitle("▶︎", forState: UIControlState.Normal)
@@ -168,12 +240,14 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
             player.skipToBeginning()
         }
     }
-    
+
+
     
     @IBAction func pushNext(sender: AnyObject) {
         player.skipToNextItem()
     }
 
+   
 
 }
 
