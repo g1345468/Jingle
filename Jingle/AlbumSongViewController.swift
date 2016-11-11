@@ -46,7 +46,7 @@ class AlbumSongViewController: UIViewController {
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             cell.textLabel!.textAlignment = NSTextAlignment.Center
             cell.textLabel!.font = UIFont.boldSystemFontOfSize(UIFont.labelFontSize())
-            cell.textLabel!.text = String(songNames.count) + "人のアーティスト"
+            cell.textLabel!.text = String(songNames.count) + "曲"
         } else {
             cell.textLabel!.textAlignment = NSTextAlignment.Left
             cell.textLabel!.font = UIFont.systemFontOfSize(UIFont.labelFontSize())
