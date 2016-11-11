@@ -22,6 +22,7 @@
 		2DD489A91DD04ED100093286 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2DD489A71DD04ED100093286 /* LaunchScreen.storyboard */; };
 		2DD489B41DD04ED200093286 /* JingleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD489B31DD04ED200093286 /* JingleTests.swift */; };
 		2DD489BF1DD04ED200093286 /* JingleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD489BE1DD04ED200093286 /* JingleUITests.swift */; };
+		2DD79AE01DD58CEF0021BD55 /* AlbumSongViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD79ADF1DD58CEF0021BD55 /* AlbumSongViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		2DD489BA1DD04ED200093286 /* JingleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = JingleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2DD489BE1DD04ED200093286 /* JingleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JingleUITests.swift; sourceTree = "<group>"; };
 		2DD489C01DD04ED200093286 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2DD79ADF1DD58CEF0021BD55 /* AlbumSongViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlbumSongViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 				2DD489A01DD04ED100093286 /* AritstViewController.swift */,
 				2DBDD8BD1DD1BB6000A136C3 /* AlbumViewController.swift */,
 				2DD489A21DD04ED100093286 /* Main.storyboard */,
+				2DD79ADF1DD58CEF0021BD55 /* AlbumSongViewController.swift */,
 				2D6BF7E41DD4665500386C81 /* PlayingViewController.swift */,
 				2D6DCB7B1DD337A400987729 /* ArtistAlbumSongViewController.swift */,
 				2D74691A1DD2C19E00392F5F /* ArtistAlbumViewController.swift */,
@@ -292,6 +295,7 @@
 				2D4A0AB91DD239960003AF71 /* MusicInfo.swift in Sources */,
 				2D6BF7E51DD4665500386C81 /* PlayingViewController.swift in Sources */,
 				2DD489A11DD04ED100093286 /* AritstViewController.swift in Sources */,
+				2DD79AE01DD58CEF0021BD55 /* AlbumSongViewController.swift in Sources */,
 				2DD4899D1DD04ED100093286 /* AppDelegate.swift in Sources */,
 				2DD4899F1DD04ED100093286 /* MainViewController.swift in Sources */,
 				2D6DCB7C1DD337A400987729 /* ArtistAlbumSongViewController.swift in Sources */,

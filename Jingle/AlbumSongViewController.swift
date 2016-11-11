@@ -1,40 +1,32 @@
 //
-//  ArtistAlbumSongViewController.swift
+//  AlbumSongViewController.swift
 //  Jingle
 //
-//  Created by Yamada Seisuke on 2016/11/09.
+//  Created by Yamada Seisuke on 2016/11/11.
 //  Copyright © 2016年 Ito.inc. All rights reserved.
 //
 
 import UIKit
 import MediaPlayer
 
-class ArtistAlbumSongViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-    
-    
+class AlbumSongViewController: UIViewController {
+
     @IBOutlet weak var songTable: UITableView!
-
+    
     var songNames = [String]()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         navigationItem.title = MusicInfo.selectedAlbum
         
         let query = MPMediaQuery.songsQuery()
-        let predicate = MPMediaPropertyPredicate(value: MusicInfo.selectedArtist, forProperty: MPMediaItemPropertyArtist, comparisonType: MPMediaPredicateComparison.EqualTo)
+        let predicate = MPMediaPropertyPredicate(value: MusicInfo.selectedAlbum, forProperty: MPMediaItemPropertyAlbumTitle, comparisonType: MPMediaPredicateComparison.EqualTo)
         query.addFilterPredicate(predicate)
-        let predicate2 = MPMediaPropertyPredicate(value: MusicInfo.selectedAlbum, forProperty: MPMediaItemPropertyAlbumTitle, comparisonType: MPMediaPredicateComparison.EqualTo)
-        query.addFilterPredicate(predicate2)
         for collection in query.collections! {
-            let song = collection.representativeItem!.title ?? "不明"
-            songNames.append(song)
+            let songName = collection.representativeItem!.title ?? "不明"
+            songNames.append(songName)
         }
-        
-        
-
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,30 +40,29 @@ class ArtistAlbumSongViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCellWithIdentifier("ArtistAlbumSongCell", forIndexPath: indexPath)
+  
+        let cell = tableView.dequeueReusableCellWithIdentifier("AlbumSongCell", forIndexPath: indexPath)
         if(indexPath.row == 0) {
             cell.selectionStyle = UITableViewCellSelectionStyle.None
             cell.textLabel!.textAlignment = NSTextAlignment.Center
             cell.textLabel!.font = UIFont.boldSystemFontOfSize(UIFont.labelFontSize())
-            cell.textLabel!.text = String(songNames.count) + "曲"
+            cell.textLabel!.text = String(songNames.count) + "人のアーティスト"
         } else {
             cell.textLabel!.textAlignment = NSTextAlignment.Left
             cell.textLabel!.font = UIFont.systemFontOfSize(UIFont.labelFontSize())
             cell.textLabel!.text = songNames[indexPath.row - 1]
         }
         return cell
+
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if(indexPath.row != 0) {
             let query = MPMediaQuery.songsQuery()
-            let predicate = MPMediaPropertyPredicate(value: MusicInfo.selectedArtist, forProperty: MPMediaItemPropertyArtist, comparisonType: MPMediaPredicateComparison.EqualTo)
+            let predicate = MPMediaPropertyPredicate(value: MusicInfo.selectedAlbum, forProperty: MPMediaItemPropertyAlbumTitle, comparisonType: MPMediaPredicateComparison.EqualTo)
             query.addFilterPredicate(predicate)
-            let predicate2 = MPMediaPropertyPredicate(value: MusicInfo.selectedAlbum, forProperty: MPMediaItemPropertyAlbumTitle, comparisonType: MPMediaPredicateComparison.EqualTo)
+            let predicate2 = MPMediaPropertyPredicate(value: songNames[indexPath.row - 1], forProperty: MPMediaItemPropertyTitle, comparisonType: MPMediaPredicateComparison.EqualTo)
             query.addFilterPredicate(predicate2)
-            let predicate3 = MPMediaPropertyPredicate(value: songNames[indexPath.row - 1], forProperty: MPMediaItemPropertyTitle, comparisonType: MPMediaPredicateComparison.EqualTo)
-            query.addFilterPredicate(predicate3)
             MusicInfo.player.setQueueWithQuery(query)
             MusicInfo.player.play()
         
@@ -87,6 +78,6 @@ class ArtistAlbumSongViewController: UIViewController, UITableViewDelegate, UITa
         }
     }
 
-    
-    
+
+
 }
