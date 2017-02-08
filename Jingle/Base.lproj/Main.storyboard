@@ -38,14 +38,14 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Artist Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aoa-Ei-L3F">
-                                <rect key="frame" x="8" y="398" width="304" height="21"/>
+                                <rect key="frame" x="8" y="392" width="304" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Song Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Zc-z2-8KW">
-                                <rect key="frame" x="8" y="368" width="304" height="21"/>
+                                <rect key="frame" x="8" y="365" width="304" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -108,6 +108,16 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vD1-dl-PA8">
+                                            <rect key="frame" x="128" y="198" width="64" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="endEditing:" destination="9pv-A4-QxB" eventType="editingDidEndOnExit" id="7AF-GM-Xcj"/>
+                                            </connections>
+                                        </textField>
                                     </subviews>
                                     <gestureRecognizers/>
                                     <connections>
@@ -154,6 +164,7 @@
                         <outlet property="artistLabel" destination="aoa-Ei-L3F" id="qdY-5I-ehn"/>
                         <outlet property="blurView" destination="v9d-mb-J6U" id="BjR-as-Ws6"/>
                         <outlet property="countLabel" destination="RGq-U7-0eL" id="68W-3v-nQd"/>
+                        <outlet property="firstField" destination="vD1-dl-PA8" id="hdb-WX-yes"/>
                         <outlet property="imageView" destination="oFP-hu-N2F" id="L5I-dK-cCJ"/>
                         <outlet property="playButton" destination="wQO-fV-GFG" id="ofU-uj-1eg"/>
                         <outlet property="playingTimeLabel" destination="lcD-MI-BXW" id="cpW-z4-sXp"/>
@@ -179,7 +190,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="446" y="-681"/>
+            <point key="canvasLocation" x="444.375" y="-681.33802816901414"/>
         </scene>
         <!--Artist Album View Controller-->
         <scene sceneID="O2i-iY-Vrd">

@@ -11,7 +11,11 @@ import MediaPlayer
 
 class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
     
+    let userDefaults = NSUserDefaults.standardUserDefaults()
     
+    @IBOutlet weak var firstField: UITextField!
+    
+
     var player = MPMusicPlayerController()
     var mediaItem: MPMediaItem!
   
@@ -55,6 +59,11 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
         self.view.addGestureRecognizer(swipe)
         
         NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(MainViewController.updateTimeBar(_:)), userInfo: nil, repeats: true)
+        
+        let hoge = player.nowPlayingItem?.persistentID.hashValue
+        if let firstTime = userDefaults.stringForKey(String(hoge)) {
+            firstField.text = firstTime
+        }
 
     }
     
@@ -247,6 +256,15 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
         player.skipToNextItem()
     }
 
+    
+    
+    @IBAction func endEditing(sender: AnyObject) {
+        self.view.endEditing(true)
+        
+        let hoge = player.nowPlayingItem?.persistentID.hashValue
+        userDefaults.setObject(firstField.text, forKey: String(hoge))
+        userDefaults.synchronize()
+    }
    
 
 }
