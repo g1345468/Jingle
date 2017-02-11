@@ -14,6 +14,7 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
     let userDefaults = NSUserDefaults.standardUserDefaults()
     
     @IBOutlet weak var firstField: UITextField!
+    var firstTime: Int = 0
     
 
     var player = MPMusicPlayerController()
@@ -61,8 +62,9 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
         NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: #selector(MainViewController.updateTimeBar(_:)), userInfo: nil, repeats: true)
         
         let hoge = player.nowPlayingItem?.persistentID.hashValue
-        if let firstTime = userDefaults.stringForKey(String(hoge)) {
-            firstField.text = firstTime
+        if let firstTimeString = userDefaults.stringForKey(String(hoge)) {
+            firstField.text = firstTimeString
+            firstTime = Int(firstTimeString)!
         }
 
     }
@@ -82,6 +84,9 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
                 }
             } else {
                 playingTimeLabel.text = String(hour) + ":" + String(minute) + ":" + String(second)
+            }
+            if(firstTime != 0 && Int(player.currentPlaybackTime) > firstTime) {
+                player.skipToNextItem()
             }
 
         }
@@ -199,7 +204,15 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
         }
         */
         
-       
+        let hoge = player.nowPlayingItem?.persistentID.hashValue
+        if let firstTimeString = userDefaults.stringForKey(String(hoge)) {
+            firstField.text = firstTimeString
+            firstTime = Int(firstTimeString)!
+        } else {
+            firstField.text = ""
+            firstTime = 0
+        }
+
         
     }
     
@@ -260,6 +273,8 @@ class MainViewController: UIViewController, MPMediaPickerControllerDelegate {
     
     @IBAction func endEditing(sender: AnyObject) {
         self.view.endEditing(true)
+        
+        firstTime = Int(firstField.text!)!
         
         let hoge = player.nowPlayingItem?.persistentID.hashValue
         userDefaults.setObject(firstField.text, forKey: String(hoge))

@@ -78,5 +78,13 @@ class ArtistAlbumViewController: UIViewController, UITableViewDelegate, UITableV
 
 
 
+    @IBAction func shuffle(sender: AnyObject) {
+        let query = MPMediaQuery.artistsQuery()
+        let predicate = MPMediaPropertyPredicate(value: MusicInfo.selectedArtist, forProperty: MPMediaItemPropertyArtist, comparisonType: MPMediaPredicateComparison.EqualTo)
+        query.addFilterPredicate(predicate)
+        MusicInfo.player.setQueueWithQuery(query)
+        MusicInfo.player.shuffleMode = MPMusicShuffleMode.Songs
+        MusicInfo.player.play()
+    }
 
 }
